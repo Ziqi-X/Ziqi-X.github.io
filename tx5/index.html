@@ -34,11 +34,6 @@
                 y: event.clientY
             };
 
-            //鼠标移动在页面上的具体宽度和高度位置
-            // console.log(mouse);
-
-            //判断左右
-            // console.log(mouse.x < w / 2 ? "左" : "右");
             console.log(w / 2 - mouse.x, h / 2 - mouse.y);
 
             bg.style.transform =
@@ -61,18 +56,13 @@
 
             var deg = (Math.atan((mouse.y - h / 2) / (mouse.x - w / 2)) * 180) / Math.PI;
 
-            // 判断象限
             var cx = mouse.x - w / 2;
             var cy = mouse.y - h / 2;
             if (cx > 0) {
-                // 第一二象限
                 deg = deg + 90;
             } else {
-                // 第三四象限
                 deg = deg + 270;
             }
-            // 每个象限都多加 90度 让0度上下
-            // console.log(deg);
 
             shine.style.backgroundImage = "linear-gradient(" + deg + "deg, transparent, rgba(255, 255, 255, 0.3))";
         }
