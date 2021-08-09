@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/天气预报.css">
+</head>
+
+<body>
+    <div class="box">
+        <h2>天气预报</h2>
+        <div class="found">
+            <textarea placeholder="请输城市名字"></textarea>
+            <button><span>搜索</span></button>
+        </div>
+        <div class="math_city">
+            <ul>
+                <li class="first">热门城市:</li>
+            </ul>
+            <ul class="cityname">
+                <li>广&nbsp;州</li>
+                <li>北&nbsp;京</li>
+                <li>上&nbsp;海</li>
+                <li>深&nbsp;圳</li>
+                <li>苏&nbsp;州</li>
+                <li>大&nbsp;连</li>
+                <li>重&nbsp;庆</li>
+            </ul>
+            <ul>
+                <li class="last">换一批 <img src="./images/换一批.png" style="width: 12px; height: 12px;"></li>
+            </ul>
+        </div>
+
+        <div class="img">
+            <ul>
+                <li>
+                    <img src="./images/baoxue.png" alt="">
+                    <p class="tianqi">雷阵雨</p>
+                    <p class="wendu">最低温度25度~最高温度33度</p>
+                    <p class="date">2021-06-09星期三</p>
+                    <p class="fengxiang">北风</p>
+                    <p class="fengli">1-2级</p>
+                </li>
+                <div class="line"></div>
+                <li>
+                    <img src="./images/baoxue.png" alt="">
+                    <p class="tianqi">雷阵雨</p>
+                    <p class="wendu">最低温度25度~最高温度33度</p>
+                    <p class="date">2021-06-09星期三</p>
+                    <p class="fengxiang">北风</p>
+                    <p class="fengli">1-2级</p>
+                </li>
+                <div class="line"></div>
+
+                <li>
+                    <img src="./images/baoxue.png" alt="">
+                    <p class="tianqi">雷阵雨</p>
+                    <p class="wendu">最低温度25度~最高温度33度</p>
+                    <p class="date">2021-06-09星期三</p>
+                    <p class="fengxiang">北风</p>
+                    <p class="fengli">1-2级</p>
+                </li>
+                <div class="line"></div>
+
+                <li>
+                    <img src="./images/baoxue.png" alt="">
+                    <p class="tianqi">雷阵雨</p>
+                    <p class="wendu">最低温度25度~最高温度33度</p>
+                    <p class="date">2021-06-09星期三</p>
+                    <p class="fengxiang">北风</p>
+                    <p class="fengli">1-2级</p>
+                </li>
+                <div class="line"></div>
+
+                <li>
+                    <img src="./images/baoxue.png" alt="">
+                    <p class="tianqi">雷阵雨</p>
+                    <p class="wendu">最低温度25度~最高温度33度</p>
+                    <p class="date">2021-06-09星期三</p>
+                    <p class="fengxiang">北风</p>
+                    <p class="fengli">1-2级</p>
+                </li>
+                <div class="line"></div>
+
+                <li>
+                    <img src="./images/baoxue.png" alt="">
+                    <p class="tianqi">雷阵雨</p>
+                    <p class="wendu">最低温度25度~最高温度33度</p>
+                    <p class="date">2021-06-09星期三</p>
+                    <p class="fengxiang">北风</p>
+                    <p class="fengli">1-2级</p>
+                </li>
+                <div class="line"></div>
+
+                <li>
+                    <img src="./images/baoxue.png" alt="">
+                    <p class="tianqi">雷阵雨</p>
+                    <p class="wendu">最低温度25度~最高温度33度</p>
+                    <p class="date">2021-06-09星期三</p>
+                    <p class="fengxiang">北风</p>
+                    <p class="fengli">1-2级</p>
+                </li>
+                <div class="line"></div>
+
+            </ul>
+        </div>
+    </div>
+
+    <script src="../js/ajax.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        var content = document.querySelector(".img");
+        // enter键盘事件
+        document.onkeydown = function(e) {　　
+            if (e.keyCode == 13) {　
+                event.cancelBubble = true;
+                event.preventDefault();
+                event.stopPropagation();　　　
+                $("button").click();
+            }
+        };
+
+        $("button").click(function() {
+            // 文本框输入值
+            $('textarea').val();
+
+            textareaVal = $('textarea').val();
+            getData(textareaVal);
+            $('textarea').val("");
+        });
+
+        function getData(currentName) {
+            console.log(currentName)
+            $.ajax({
+                type: "get",
+
+                url: "http://api.tianapi.com/txapi/tianqi/index",
+                data: {
+                    key: "0736903ec51b86e529e84f60415cb0f5",
+                    city: currentName,
+                },
+                success: function(res) {
+                    // if (res.status != 0) {
+                    //     $(".math_city").html(res.msg);
+                    //     $(".cityname").hide();
+                    //     return;
+                    // }
+                    // console.log(res);
+                    // console.log(res.newslist);
+                    var data = res.newslist;
+                    renderData(data);
+
+                },
+            })
+        }
+
+        getData("广州");
+        // 左边数据渲染HTML结构的函数
+        function renderData(currentData) {
+            console.log(currentData);
+
+            var htmlStr = ``;
+
+            for (var i = 0; i < currentData.length; i++) {
+                var item = currentData[i];
+
+                htmlStr += `  
+            <ul>
+                <li>
+                    <img src="./images/${item.weatherimg}" alt="">
+                    <p class="tianqi">${item.weather}</p>
+                    <p class="wendu">最低温度${item.lowest}~最高温度${item.highest}</p>
+                    <p class="date">${item.date}${item.week}</p>
+                    <p class="fengxiang">${item.wind}</p>
+                    <p class="fengli">${item.windsc}</p>
+                </li>
+                <div class="line"></div>
+
+            </ul>
+        `;
+            }
+
+            content.innerHTML = htmlStr;
+        }
+
+        $('.math_city .last').click(function() {
+            // 城市数组
+            var CityNameall = ["北京", "上海", "广州", "深圳", "苏州", "大连", "重庆", "杭州", "无锡", "天津", "佛山", "宁波", "南京", "成都", "东莞", "武汉", "青岛", "沈阳", "烟台", "唐山", "济南", "哈尔滨", "石家庄", "郑州", "泉州", "温州", "长沙", "南通", "长春", "潍坊", "绍兴", "福州", "淄博", "大庆", "常州", "台州", "济宁", "东营", "西安", "徐州", "临沂", "威海", "嘉兴", "邯郸", "洛阳", "沧州", "金华", "昆明", "南阳", "保定"];
+
+            // 封装随机数函数
+            function generateMixed(n) {
+                var res = "";
+                for (var i = 0; i < n; i++) {
+                    var id = Math.ceil(Math.random() * 49);
+
+                    res += CityNameall[id];
+                }
+                return res;
+            }
+
+            var res = generateMixed(7);
+            console.log(res);
+            renderData2(res);
+
+        })
+
+        var content2 = document.querySelector(".math_city .cityname");
+        //渲染选项
+        function renderData2(currentData) {
+            console.log(currentData);
+
+            var htmlStr2 = ``;
+
+            for (var i = 0; i < currentData.length; i++) {
+                var item = currentData[i];
+                htmlStr2 += `  
+           <ul class="cityname">
+               <li>${item}</li>
+            </ul>
+        `;
+            }
+
+            content2.innerHTML = htmlStr2;
+        }
+    </script>
+</body>
+
+</html>
