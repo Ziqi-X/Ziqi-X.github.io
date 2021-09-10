@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.box{
+    .header{
+        background-color: #c69;
+        height: 15rem;
+        font-size: 3rem;
+        text-align: center;
+        line-height: 15rem;
+        color: white;
+    }
+
+    .itemBox{
+        .itemTitle{
+            padding: 2rem;
+              font-size: 2rem;
+          }
+      
+          .item{
+              display: flex;
+              justify-content: space-evenly;
+          flex-wrap: wrap;
+              li{
+                  margin-top: 1rem;
+                  flex-basis: 28%;
+                  height: 10rem;
+                  background-color: #ccc;
+                  list-style-type: none;
+                  transition:all 2s inherit;
+                  a{
+                      img{
+                          width: 100%;
+                          height: 100%;
+                          background-size: cover;
+                      }
+                      &:hover img{
+                        transition:all 1s;
+                        cursor: pointer;
+                        transform: scale(1.2);
+                    }
+                  }
+              }
+          }
+    }
+   
+}
