@@ -1,6 +1,39 @@
 * {
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
+}
+.box .nav {
+  position: fixed;
+  width: 100%;
+}
+.box .nav ul {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #c69;
+  height: 5rem;
+  line-height: 5rem;
+  opacity: 0.8;
+}
+.box .nav ul li {
+  list-style-type: none;
+  color: white;
+  font-size: 1.3rem;
+}
+.box .nav ul li:hover {
+  cursor: pointer;
+}
+.box .nav ul li a {
+  text-decoration: none;
+}
+.box .nav ul li a:link {
+  color: white;
+}
+.box .nav ul li a:visited {
+  color: #ccc;
+}
+.box .nav ul li a:active {
+  color: skyblue;
 }
 .box .header {
   background-color: #c69;
@@ -10,9 +43,17 @@
   line-height: 15rem;
   color: white;
 }
+.box .itemBox {
+  margin-top: 1em;
+}
 .box .itemBox .itemTitle {
+  width: 5em;
   padding: 2rem;
   font-size: 2rem;
+  margin-top: 3em;
+  border: 1px solid #ccc;
+  background-color: #c69;
+  color: white;
 }
 .box .itemBox .item {
   display: flex;
@@ -22,10 +63,17 @@
 .box .itemBox .item li {
   margin-top: 1rem;
   flex-basis: 28%;
-  height: 10rem;
+  height: 20rem;
   background-color: #ccc;
   list-style-type: none;
   transition: all 2s inherit;
+  border: 1px solid #ccc;
+  margin-top: 4em;
+}
+.box .itemBox .item li .title {
+  font-size: 1.8rem;
+  color: skyblue;
+  text-align: center;
 }
 .box .itemBox .item li a img {
   width: 100%;
