@@ -1,0 +1,45 @@
+.HotBox[data-v-22a1a25d] {
+    height: 140px;
+    background-size: contain;
+    position: relative;
+    background-image: url(../img/hot_music_bg_3x.2bfefd3b.jpg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 0
+}
+
+.HotBox .title[data-v-22a1a25d] {
+    background-image: url(../img/index_icon_2x.5207a28c.png);
+    background-size: 166px 97px;
+    width: 142px;
+    height: 67px;
+    background-position: -24px -30px;
+    z-index: 10;
+    margin-left: 20px
+}
+
+.HotBox .UpDate[data-v-22a1a25d] {
+    margin-top: 10px;
+    color: hsla(0, 0%, 100%, .8);
+    z-index: 9;
+    margin-left: 20px;
+    font: 14px/1.5 Helvetica, sans-serif, STHeiTi;
+    font-size: 12px
+}
+
+.HotBox .UpDate span[data-v-22a1a25d] {
+    margin-left: 5px;
+    font-size: 12px
+}
+
+.HotBox[data-v-22a1a25d]:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, .2)
+}
