@@ -1,0 +1,120 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+li {
+  list-style: none;
+}
+img{
+  vertical-align: bottom;
+}
+.box {
+  width: 1200px;
+  height: 410px;
+  box-sizing: border-box;
+  border: 5px solid skyblue;
+  padding-top: 29px;
+  padding-bottom: 23px;
+  border-radius: 10px;
+  margin: 100px auto;
+  position: relative;
+}
+.box h1 {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 54px;
+}
+.box .search_box {
+  display: flex;
+  justify-content: center;
+}
+.box .search_box .search_input {
+  border: none;
+  outline: none;
+  vertical-align: bottom;
+  width: 400px;
+  height: 30px;
+  border: 2px solid skyblue;
+  text-indent: 1em;
+}
+.box .search_box .search_btn {
+  line-height: 34px;
+  text-align: center;
+  width: 82px;
+  height: 34px;
+  color: white;
+  background: skyblue;
+  cursor: pointer;
+}
+.box .hot_words {
+  width: 484px;
+  margin:0 auto;
+  margin-top: 20px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+}
+.box .hot_words .title{
+  width: 60px;
+}
+.box .hot_words ul {
+  flex:1;
+  display: flex;
+  justify-content: space-evenly;
+  float: left;
+}
+.box .hot_words ul li {
+  color: #a594a6;
+  cursor: pointer;
+}
+.box .hot_words ul li:last-child {
+  margin-right: 0;
+}
+.box .hot_words .changeIcon{
+  width: 70px;
+  cursor: pointer;
+  user-select: none;
+}
+
+
+.box .hot_words .changeIcon svg{
+  vertical-align: -3px;
+}
+
+.box .content {
+  margin-top: 30px;
+}
+.box .content ul {
+  display: flex;
+}
+.box .content ul li {
+  flex: 1;
+  text-align: center;
+  border-right: 1px solid #f0f0f0;
+  cursor: pointer;
+  font-size: 12px;
+  padding-bottom: 10px;
+}
+.box .content ul li p {
+  line-height: 20px;
+}
+.box .content ul li:last-child {
+  border-right: none;
+}
+.box .content ul li:hover {
+  background: #f5faff;
+}
+.box .content ul li .title {
+  margin-top: 10px;
+  color: orange;
+}
+.box .content ul li .desc {
+  color: orange;
+}
+.box .content ul li .day_week {
+  color: #aaaaaa;
+}

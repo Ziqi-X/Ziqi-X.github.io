@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style:none;
+        }
+        img{
+            vertical-align: bottom;
+        }
+        .banner{
+            width: 1125px;
+            height: 352px;
+            margin:50px auto;
+            position: relative;
+        }
+        .banner .banner_imgs{
+            width: 1125px;
+            height: 352px;
+            overflow: hidden;
+        }
+        .banner .banner_imgs ul{
+            height: 352px;
+            /* 设置宽度为父元素的700% */
+            width: 700%;
+            /* 一开始我们打开页面,我们要看到的图片是1的 */
+            margin-left:-100%;
+            /* CSS3过渡 */
+            transition: margin-left 0.5s;
+        }
+        .banner .banner_imgs ul li{
+            width: 1125px;
+            height: 352px;
+            float: left;
+        }
+        .banner .arrow_left, .banner .arrow_right{
+            width: 30px;
+            height: 50px;
+            color:white;
+            background: orange;
+            text-align: center;
+            line-height: 50px;
+            font-size:30px;
+            position: absolute;
+            top: 50%;
+            font-family: "宋体";
+            margin-top: -25px;
+            cursor: pointer;
+
+            /* 清除选文字以后样式 */
+            user-select: none;
+        }
+        .banner .arrow_left{
+            left: 0;
+        }
+        .banner .arrow_right{
+            right: 0;
+        }
+
+        .banner .dot{
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            margin-left: -45px;
+        }
+        .banner .dot ol {
+            overflow: hidden;
+        }
+        .banner .dot ol li{
+            float: left;
+            width: 10px;
+            height: 10px;
+            background: black;
+            border-radius: 50%;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .banner .dot ol li:last-child{
+            margin-right: 0;
+        }
+        .banner .dot ol li.active{
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+    <!-- 轮播图盒子 -->
+    <div class="banner">
+        <!-- 轮播图片层 -->
+        <div class="banner_imgs">
+            <ul>
+                <li><a href="#"><img src="images原图/05.jpg"/></a></li>
+                <li><a href="#"><img src="images原图/01.jpg"/></a></li>
+                <li><a href="#"><img src="images原图/02.jpg"/></a></li>
+                <li><a href="#"><img src="images原图/03.jpg"/></a></li>
+                <li><a href="#"><img src="images原图/04.jpg"/></a></li>
+                <li><a href="#"><img src="images原图/05.jpg"/></a></li>
+                <li><a href="#"><img src="images原图/01.jpg"/></a></li>
+            </ul>
+        </div>
+
+        <!-- 左右按钮 -->
+        <span class="arrow_left">&lt;</span>
+        <span class="arrow_right">&gt;</span>
+
+        <!-- 小圆点 -->
+        <div class="dot">
+            <ol>
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // 封装一个$方法,专门用于获取DOM对象
+        // $仅仅就是一个函数名称
+        // 参数是一个css选择器
+        function $( cssSelector ){
+            var obj = document.querySelectorAll( cssSelector );
+            
+            if( obj.length == 1 ){// 判断伪数组长度是否为1 如果是1,那么代表当前css选择器只能获取到一个对象
+                return obj[0];
+            }
+
+            return obj;
+        }
+
+        // 需求
+
+        // 功能1: 点击右侧按钮一次，就让图片滚动一张
+        
+        // 获取右侧按钮DOM对象
+        var arrow_right = $(".arrow_right");
+
+        // 获取.banner_imgs ul对应DOM对象
+        var bannerImgsUl = $(".banner_imgs ul");
+
+        // 获取小圆点对应的所有li
+        var dotLis = $(".dot ol li");
+
+        // 定义一个全局变量num,代表轮播图片的索引号,默认是1
+        var num = 1;
+
+        // 定义一个全局变量circleIndex,代表高亮小圆点的序号,默认为0
+        var circleIndex = 0;
+
+        
+        // 功能7: 防止轮播图左右按钮连续点击造成播放过快,添加节流阀功能
+        // 节流阀:就是为了让事件在指定的一段事件内,只有触发一次,   比如鼠标点击事件,  2秒内只能触发一次    点完一次以后,2秒内点击都无效
+        // 节流阀可以稀释事件被调用的频率
+        // 节流阀主要实现是通过一个变量,一般是布尔值, 控制开关  打开的时候,代码可以进行 关闭的时候,代码不能进行
+        var flag = true;// 定义一个节流阀 ,默认值为true,代表打开状态
+        
+        // 右侧按钮点击事件
+        arrow_right.onclick = function(){
+            if( flag ){// 判断节流阀的状态
+                flag = false;// 关闭节流阀
+                // 自加1
+                num++;
+                // 设置过渡
+                bannerImgsUl.style.transition = "margin-left 0.5s";
+                // 改变margin-left样式值
+                bannerImgsUl.style.marginLeft = -num * 100 + "%";
+
+                // 功能2: 点击右侧按钮,小圆圈跟随变化
+                circleIndex++;
+                if( circleIndex == 5 ){// 边界判断
+                    circleIndex = 0;
+                }
+                
+                // 排他
+                for(var i = 0; i < dotLis.length; i++ ){
+                    dotLis[i].classList.remove("active");
+                }
+                // 设置高亮
+                dotLis[ circleIndex ].classList.add("active");
+            }
+        }
+
+        // 过渡完成事件
+        bannerImgsUl.ontransitionend = function(){
+            if( num == 6 ){// 轮播图轮播到了最后一张图片 图片1
+                num = 1;
+                // 设置无序过渡
+                bannerImgsUl.style.transition = "margin-left 0s";
+                // 改变ul的marginLeft
+                bannerImgsUl.style.marginLeft = -num * 100 + "%";
+            }
+
+            if( num == 0 ){// 轮播图轮播到了最后一张图片 图片5
+                num = 5;
+                // 设置无序过渡
+                bannerImgsUl.style.transition = "margin-left 0s";
+                // 改变ul的marginLeft
+                bannerImgsUl.style.marginLeft = -num * 100 + "%";
+            }
+
+            // 等过渡事件完成以后,再打开节流阀
+            flag = true;
+        }
+
+
+        // 功能3: 实现左侧按钮功能
+        var arrow_left = $(".arrow_left");
+        arrow_left.onclick = function(){
+            if( flag ){// 判断节流阀状态
+                flag = false;// 关闭节流阀
+                // 自减1
+                num--;
+                // 设置过渡
+                bannerImgsUl.style.transition = "margin-left 0.5s";
+                // 改变margin-left样式值
+                bannerImgsUl.style.marginLeft = -num * 100 + "%";
+
+                // 功能2: 点击左侧按钮,小圆圈跟随变化
+                circleIndex--;
+                if( circleIndex == -1 ){// 边界判断
+                    circleIndex = 4;
+                }
+                
+                // 排他
+                for(var i = 0; i < dotLis.length; i++ ){
+                    dotLis[i].classList.remove("active");
+                }
+                // 设置高亮
+                dotLis[ circleIndex ].classList.add("active");
+            }
+        }
+
+
+        // 功能4: 被点击小圆圈高亮,并且滚动到对应图片
+        for(var i = 0; i < dotLis.length; i++ ){
+            // 设置自定义属性
+            dotLis[i].setAttribute("data-num", i+1 );
+            dotLis[i].onclick = function(){
+                // 排他
+                for(var j = 0; j < dotLis.length; j++ ){
+                    dotLis[j].classList.remove("active");
+                }
+                // 高亮当前被点击的li
+                this.classList.add("active");
+
+                // 获取当前li身上的自定义属性data-num
+                var currentNum = this.getAttribute("data-num");
+                
+                // 设置过渡
+                bannerImgsUl.style.transition = "margin-left 0.5s";
+                // 改变margin-left样式值
+                bannerImgsUl.style.marginLeft = -currentNum * 100 + "%";
+
+                // 功能5: 点击某个小圆圈,再点击左侧按钮或右侧按钮,解决图片跟小圆点对应不上问题
+                // 因为全局变量num和circleIndex分别控制轮播到第几个图片,和第几个小圆点高亮
+                num = currentNum;
+                circleIndex = currentNum-1;
+            }
+        }
+        
+        // 功能6: 自动播放功能(鼠标移上轮播图层以后停止定时器,鼠标移出轮播图层以后重新开启定时器)
+        // window.setInterval( 匿名函数, 有名函数名 或者 "有名函数名()", 时间)
+        var timer = null;// 定时器标识符
+
+        // 开启自动轮播功能函数
+        function autoPlay(){
+            if( timer === null ){
+                timer = window.setInterval( function(){
+                    // 手动触发右侧按钮的点击事件
+                    arrow_right.click();
+                }, 2500 );
+            }
+        }
+
+        // 暂停自动轮播功能函数
+        function stopPlay(){
+            window.clearInterval( timer );
+            timer = null;
+        }
+
+        // 默认开启自动轮播
+        autoPlay();
+
+        // 获取.banner的dom对象
+        var banner = $(".banner");
+        // 鼠标移上.banner的时候,停止定时器
+        banner.onmouseover = function(){
+            stopPlay();
+        }
+
+        // 鼠标移出.banner的时候,重新开启定时器
+        banner.onmouseout = function(){
+            autoPlay();
+        }
+    </script>
+</body>
+</html>

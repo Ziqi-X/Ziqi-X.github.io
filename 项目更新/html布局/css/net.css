@@ -1,0 +1,408 @@
+/* 预设样式 start  */
+
+
+/* 选择器和左边大括号有个空格隔开 */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    /* 去掉无序列表默认的列表项目符号 */
+    list-style: none;
+}
+
+
+/* 去掉a标签的默认样式 */
+
+a {
+    /* 给a标签设置字体颜色，默认是蓝色的字体颜色和蓝色的下划线 */
+    color: #777777;
+    /* 去掉下划线 */
+    text-decoration: none;
+}
+
+
+/* 设置左浮动 */
+
+.fl_left {
+    float: left;
+}
+
+
+/* 设置右浮动 */
+
+.fr_right {
+    float: right;
+}
+
+
+/* 清除浮动 */
+
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+
+/* 预设样式 end  */
+
+
+/* header区域  start  */
+
+.header {
+    position: relative;
+    width: 1200px;
+}
+
+.header .header_box {
+    position: fixed;
+    background-color: #FFFFFFE6;
+    border-bottom: 3px solid #0ba1e4;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: 90px;
+    line-height: 60px;
+    margin: 0 auto;
+    /* background-color: yellow; */
+}
+
+.header .header_box .left li {
+    position: absolute;
+    padding-top: 15px;
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    left: 300px;
+}
+
+.header .header_box .right {
+    position: absolute;
+    top: 0;
+    left: 550px;
+}
+
+.header .header_box .right li {
+    /* 设置左浮动 */
+    float: left;
+    padding-left: 50px;
+    font-size: 14px;
+    padding-top: 10px;
+}
+
+.header .header_box a {
+    /* 将a标签 就是从行内元素 转成 块级元素  */
+    display: block;
+}
+
+.header .header_box a {
+    font-size: 16px;
+}
+
+.header .header_box a:hover {
+    cursor: pointer;
+    color: #0ba1e4;
+}
+
+.header .header_box .line {
+    border-bottom: 1px solid #0ba1e4;
+    margin-top: -15px;
+    margin-left: 5px;
+    width: 20px;
+}
+
+
+/* header区域  end  */
+
+.bar {
+    margin-top: 90px;
+}
+
+
+/*   content   */
+
+.content {
+    display: flex;
+    width: 100vw;
+    margin-top: 60px;
+}
+
+.content .content_items {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content .content_items .content_box {
+    flex: 1;
+}
+
+.content .content_items .content_box .title {
+    font-weight: 300;
+    font-size: 36px;
+    text-align: center;
+}
+
+.content .content_items .content_box .text {
+    font-weight: 300;
+    font-size: 20px;
+    text-align: center;
+    color: #777777;
+    margin-top: 65px;
+}
+
+
+/*   content   */
+
+
+/*     row    */
+
+.box_one {
+    padding-top: 6px;
+    background-color: #f8f8f8;
+}
+
+.row {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    margin-top: 65px;
+    padding-bottom: 60px;
+}
+
+.row .row_items {
+    display: flex;
+}
+
+.row .row_items .row_box {
+    flex: 1;
+    padding: 0px 28px;
+}
+
+.row .row_items .row_box .row_box_title {
+    font-family: "Roboto", Arial, Tahoma, sans-serif;
+    font-size: 70px;
+    line-height: 1.5em;
+    color: #0ba1e4;
+}
+
+.row .row_items .row_box .row_box_text {
+    font-weight: 300;
+    font-size: 18px;
+    color: #919191;
+    text-align: center;
+}
+
+
+/*     row   */
+
+
+/*        box     */
+
+.box_two {
+    background-color: #d9d9d9;
+    padding-top: 5px;
+    height: 650px;
+}
+
+.box {
+    width: 100vw;
+    display: flex;
+}
+
+.box .box_items {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.box .box_items .box_box {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 220px;
+    margin-top: 53px;
+    margin-left: 22px;
+}
+
+.box .box_items .box_box .box_box_title {
+    line-height: 1.5em;
+    font-weight: 300;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 62px;
+}
+
+.box .box_items .box_box .box_box_img {
+    text-align: center;
+    margin-top: 62px;
+}
+
+.box .box_items .box_box .box_box_text {
+    line-height: 1.5em;
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
+
+.box .box_items .box_box:hover {
+    background-color: rgb(17, 129, 233);
+    color: white;
+    /* Transform属性应用于元素的2D或3D转换。定义转换，只是用 Y 轴的值。 */
+    transform: translateY(5px);
+}
+
+.box .box_items .box_box p:hover {
+    color: white;
+}
+
+
+/*        box     */
+
+
+/*        table    */
+
+.table {
+    width: 100vw;
+    display: flex;
+}
+
+.table .table_items {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+.table .table_items .table_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #c1c1c1;
+    width: 250px;
+    height: 530px;
+    background-color: #f9f9f9;
+}
+
+.table .table_items .table_box .table_box_title {
+    color: #0ba1e4;
+    font-weight: bold;
+    line-height: 2em;
+    font-family: "Roboto", Arial, Tahoma, sans-serif;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.table .table_items .table_box .table_box_text {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 42px;
+}
+
+.table .table_items .table_box .border {
+    border: 1px solid #0ba1e4;
+    width: 120px;
+    border-radius: 5px;
+    color: #0ba1e4;
+}
+
+.table .table_items .table_box:hover {
+    background-color: rgb(203, 237, 253);
+    color: #0ba1e4;
+    /* 图片过渡效果，transition效果需要指定 多少秒或毫秒才能完成，持续时间为6s*/
+    transition: all .6s linear .2s;
+    /* Transform属性应用于元素的2D或3D转换。定义转换，只是用 Y 轴的值。 */
+    transform: scale(1.1);
+}
+
+
+/*        table    */
+
+
+/* cup */
+
+.box_four {
+    background-color: #F5F5F5;
+}
+
+.cup {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    margin-top: 65px;
+    padding-bottom: 60px;
+}
+
+.cup .cup_items {
+    display: flex;
+}
+
+.cup .cup_items .cup_box {
+    display: flex;
+    flex: 1;
+    padding: 0px 20px;
+}
+
+.cup .cup_items .cup_box .cup_box_title {
+    font-family: "Roboto", Arial, Tahoma, sans-serif;
+    font-size: 70px;
+    line-height: 1.5em;
+    color: #0ba1e4;
+    text-align: center;
+}
+
+.cup .cup_items .cup_box .cup_box_text {
+    font-weight: 300;
+    font-size: 18px;
+    color: #919191;
+}
+
+
+/* cup */
+
+
+/*      img      */
+
+.img_box {
+    width: 100vw;
+    display: flex;
+    margin-top: 30px;
+}
+
+.img_box .img {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+}
+
+.img_box .img .img_items {
+    flex: 1;
+    text-align: center;
+}
+
+.img_box .img .img_items .img_all {
+    margin: 0 12px;
+}
+
+.img_box .img .img_items img {
+    width: 150px;
+    height: 75px;
+    border: 1px solid #d8d8d8;
+}
+
+.img_box .img .img_items img:hover {
+    /* 图片过渡效果，transition效果需要指定 多少秒或毫秒才能完成，持续时间为6s*/
+    transition: all .6s linear .2s;
+    /* Transform属性应用于元素的2D或3D转换。定义转换，只是用 Y 轴的值。 */
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+
+/*      img      */

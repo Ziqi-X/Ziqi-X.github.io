@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #score{
+            margin-top: 44px;
+            margin-left: 50px;
+        }
+        .box{
+            width: 400px;
+            height: 400px;
+            border:1px solid blue;
+            margin-left: 50px;
+            margin-top: 50px;
+            /* 父相 */
+            position: relative;
+            /* 溢出隐藏 */
+            overflow: hidden;
+        }
+        .box .game{
+            /* 子绝 */
+            position: absolute;
+            top: -50px;
+            left: 0;
+        }
+        .box .game .row {
+            overflow: hidden;
+        }
+        .box .game .row div{
+            width: 98px;
+            height: 98px;
+            border:1px solid gray;
+            float: left;
+        }
+        .box .game .row .black{
+            background: black;
+        }
+    </style>
+</head>
+<body>
+    <!-- 统计分数的文本框 -->
+    <input type="text" id="score" value="0" disabled="disabled"/>
+
+    <!-- .box大盒子 -->
+    <div class="box">
+        <!-- .game游戏区域 -->
+        <div class="game">
+            <!-- .row行 -->
+            <!-- .black表示黑块 -->
+            <div class="row">
+                <div class="black"></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="row">
+                <div></div>
+                <div class="black"></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="row">
+                <div></div>
+                <div></div>
+                <div class="black"></div>
+                <div></div>
+            </div>
+            <div class="row">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div class="black"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 封装获取dom对象的函数
+        function $( cssSelector ){
+            var obj = document.querySelectorAll( cssSelector );
+            
+            if( obj.length == 1 ){
+                return obj[0];
+            }
+
+            return obj;
+        }
+
+        // 封装一个可以得到指定范围整数的随机函数
+        function getRandom( min, max ){
+            return Math.floor( Math.random()*(max-min+1)+min );
+        }
+
+        // 1. 让.game游戏区动画不断的下落(定时器改变top值)
+        // game游戏区域对应的dom对象
+        var game = $(".game");
+        // 下落速度
+        var speed = 1;
+        // 分数文本框
+        var scoreInput = $("#score");
+        // 初始分数
+        var score = 0;
+        // 定时器标识符
+        var timer = null;
+        // 定义一个变量,保存当前游戏状态, 布尔值  false表示游戏未结束  true游戏结束
+        var isOver = false;
+        
+        // 开启定时器,实现游戏区域下落
+        timer = window.setInterval( function(){
+            // 改变top值
+            game.style.top = game.offsetTop+speed+"px";
+            
+            
+            // 2. 当.game触底的时候(top值为0的时候), 需要添加新的一行在最前面( insertBefore ),并且每一行里面的黑块是随机出现
+            if( game.offsetTop >= 0 ){// 判断是否触底
+                // 创建新的一行
+                var newRow = document.createElement("div");
+                // 设置类名
+                newRow.className = "row";
+                // 得到一个1~4之间的随机整数
+                var randomNum = getRandom( 1 , 4 ); 
+                // 生成4个列
+                for(var i = 1; i <=  4; i++ ){
+                    // 创建新的一列
+                    var newCol = document.createElement("div");
+                    if( randomNum == i ){// 如果随机整数
+                        // 添加.black类名, 成为黑块
+                        newCol.classList.add("black");
+                    }
+                    // 把列加到行里面
+                    newRow.appendChild( newCol );
+                }
+                // 把新的一行,添加新的一行在最前面
+                game.insertBefore( newRow ,game.firstElementChild );
+                // 再次设置game的top值为-100px
+                game.style.top = "-100px";
+
+
+                // 3. 删除多余行(已经整行超过.box之外的)
+                if( game.children.length > 5 ){// 判断game的子元素长度是否超过5,因为最多能看到的就是5行
+                    // 删除最后一行
+                    game.lastElementChild.remove();
+                }
+
+                // 5. 当游戏触底的时候,最后一行存在黑块未被点击,游戏结束,停止下落
+                if( game.lastElementChild.getAttribute("data-pass") === null ){
+                    // 游戏结束
+                    alert("游戏结束");
+                    // 停止下落
+                    window.clearInterval( timer );
+                    // 改变游戏状态
+                    isOver = true;
+                }
+            }
+
+        } , 20 );
+
+        // 4. 白块黑块都需要可以被点击; 白块被点击游戏结束,停止下落;  黑块被点击,变白,加1分
+        // 使用事件委托
+        game.onclick = function( e ){
+            // 获取事件对象
+            e = e || window.event;
+
+            if( isOver ){// 如果游戏已经结束 
+                alert("游戏已经结束,请刷新页面重新开始游戏");
+            }else{// 如果游戏未结束,游戏正在进行中
+                // 判断点击的是黑块还是白块
+                if( e.target.classList.contains("black") ){// 如果点击的是黑块
+                    // 黑块变白(移除.black类名 )
+                    e.target.classList.remove("black");
+                    // 当前黑块被点击以后,在它父元素身上设置一个自定义属性 data-pass值为true 表示当前行的黑块已经被点击过了
+                    e.target.parentNode.setAttribute("data-pass" , true );
+                    // 分数文本框的值加1( 加分 )
+                    score++;// 自加1
+                    // 改变文本框的值
+                    scoreInput.value = score;
+                    // 分数每增加5分,速度加1
+                    if( score % 5 == 0 ){
+                        speed++;
+                    }
+                }else{// 如果点击的是白块
+                    // 提示信息
+                    alert("游戏结束");
+                    // 停止下落( 停止定时器 )
+                    window.clearInterval( timer );
+                    // 改变游戏状态为结束
+                    isOver = true;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

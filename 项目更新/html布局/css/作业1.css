@@ -1,0 +1,279 @@
+        /* 预设样式 start  */
+        /* 选择器和左边大括号有个空格隔开 */
+        
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        li {
+            /* 去掉无序列表默认的列表项目符号 */
+            list-style: none;
+        }
+        /* 去掉a标签的默认样式 */
+        
+        a {
+            /* 给a标签设置字体颜色，默认是蓝色的字体颜色和蓝色的下划线 */
+            color: #e8e8e8;
+            /* 去掉下划线 */
+            text-decoration: none;
+        }
+        /* 版心宽度 */
+        /* 设置左浮动 */
+        
+        .fl_left {
+            float: left;
+        }
+        /* 设置右浮动 */
+        
+        .fr_right {
+            float: right;
+        }
+        /* 清除浮动 */
+        
+        .clearfix::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+        /* 图片自适应   */
+        
+        .auto_img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        /* 预设样式 end  */
+        /*     nav       */
+        
+        .nav {
+            position: fixed;
+            right: 0;
+            left: 0;
+            background-color: #cc6699;
+        }
+        
+        .nav .nav_box {
+            width: 1200px;
+            height: 60px;
+            line-height: 60px;
+            margin: 0 auto;
+        }
+        
+        .nav .nav_box .left li {
+            padding: 0 15px;
+            font-size: 24px;
+        }
+        
+        .nav .nav_box .right li {
+            float: left;
+            padding: 0 15px;
+            font-size: 14px;
+        }
+        
+        .nav .nav_box a {
+            display: block;
+        }
+        
+        .nav .nav_box a:hover {
+            color: #fff;
+        }
+        /*     nav       */
+        /*      header    */
+        
+        .header {
+            width: 100vw;
+            display: flex;
+            background-color: #cc6699;
+            padding: 15px 0;
+        }
+        
+        .header .header_items {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            margin-top: 120px;
+            text-align: center;
+        }
+        
+        .header .header_items .header_items_content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+        
+        .header .header_items .header_items_content .header_text {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #fff;
+            padding: 25px 0;
+        }
+        
+        .header .header_items .header_items_content .header_txt {
+            padding: 10px 16px;
+            text-align: center;
+            border: 1px solid white;
+            font-size: 18px;
+            color: #e8e8e8;
+            width: 90px;
+        }
+        
+        .header .header_items .header_items_content .header_txt:hover {
+            color: yellow;
+            cursor: pointer;
+        }
+        /*      header    */
+        /*     content     */
+        
+        .content .content_items h2 {
+            font-size: 30px;
+            margin-top: 73px;
+        }
+        
+        .content .content_items p {
+            font-size: 18px;
+            margin-top: 20px;
+            line-height: 30px;
+        }
+        
+        .content {
+            width: 100vw;
+            display: flex;
+        }
+        
+        .content .content_items {
+            display: flex;
+            flex: 1;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        
+        .content .content_items .row {
+            display: flex;
+            flex: 0 0 293px;
+            margin-bottom: 20px;
+            padding: 25px;
+        }
+        
+        .content .content_items .row .content_items_text {
+            width: 350px;
+            height: 149px;
+            margin-right: 35px;
+        }
+        
+        .content .content_items .row .content_items_text a {
+            color: #cc6699;
+        }
+        
+        .content .content_items .row .content_items_text a:hover {
+            color: #333;
+            cursor: pointer;
+        }
+        /*     content     */
+        /*      bottom   */
+        
+        .bottom {
+            display: flex;
+            width: 100vw;
+        }
+        
+        .bottom .img_items {
+            display: flex;
+            flex: 1;
+            justify-content: space-around;
+            margin-top: 80px;
+        }
+        
+        .bottom .img_items .img_item_text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .bottom .img_items .img_item_text .title {
+            font-size: 26px;
+        }
+        
+        .bottom .img_items .img_item_text .text {
+            color: #818181;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+        /*      bottom   */
+        /*      img_box   */
+        
+        .img_box {
+            width: 100vw;
+            display: flex;
+            margin-top: 30px;
+        }
+        
+        .img_box .img {
+            display: flex;
+            flex: 1;
+            justify-content: space-around;
+        }
+        
+        .img_box .img .img_items {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .img_box .img .img_items .img_all {
+            margin: 0 12px;
+        }
+        
+        .img_box .img .img_items .img_all img {
+            border: 1px solid #e8e8e8;
+        }
+        
+        .img_box .img .img_items .img_all img:hover {
+            cursor: pointer;
+            /* 图片过渡效果，transition效果需要指定 多少秒或毫秒才能完成，持续时间为6s*/
+            transition: all .6s linear .2s;
+            /* Transform属性应用于元素的2D或3D转换。定义转换，只是用 Y 轴的值。 */
+            transform: translateY(-15px);
+        }
+        /*      img_box   */
+        /*       footer    */
+        
+        .footer {
+            width: 100vw;
+            display: flex;
+        }
+        
+        .footer .footer_item {
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        /*       footer    */
+        /*     last       */
+        
+        .last {
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .last .last_item {
+            display: flex;
+        }
+        
+        .last .last_item .text {
+            color: #aaaaaa;
+            flex: 1;
+        }
+        
+        .last .last_item .text span {
+            font-size: 14px
+        }
+        
+        .last .last_item .text span:hover {
+            cursor: pointer;
+            color: rgb(245, 37, 245);
+        }
+        /*     last       */
